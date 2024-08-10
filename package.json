@@ -12,7 +12,8 @@
   "dependencies": {
     "@fastify/view": "^9.1.0",
     "fastify": "^4.28.1",
-    "pug": "^3.0.3"
+    "pug": "^3.0.3",
+    "sanitize-html": "^2.13.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1"
