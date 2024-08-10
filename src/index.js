@@ -1,43 +1,26 @@
 import fastify from 'fastify';
+import view from '@fastify/view';
+import pug from 'pug';
+import generateCourses from "./utils/factories/courseFactory.js";
 
+const courses = generateCourses()
 const app = fastify();
 const port = 3000;
 
-app.get('/users', (req, res) => {
-    res.send('GET /users');
-});
-
-app.get('/users/:id', (req, res) => {
-    res.send(`User ID: ${req.params.id}`);
-});
-
-app.get('/users/:userId/post/:postId', (req, res) => {
-    res.send(`User ID: ${req.params.userId}; Post ID: ${req.params.postId}`);
-});
+await app.register(view, { engine: { pug } });
 
 app.get('/courses', (req, res) => {
-    res.send('GET /courses');
-});
-
-app.get('/courses/new', (req, res) => {
-    res.send('Course build');
+    res.view('src/views/courses/index', { courses });
 });
 
 app.get('/courses/:id', (req, res) => {
-    res.send(`Course ID: ${req.params.id}`);
-});
-
-app.get('/courses/:courseId/lessons/:id', (req, res) => {
-    res.send(`Course ID: ${req.params.courseId}; Lesson ID: ${req.params.id}`);
-});
-
-app.get('/hello', (req, res) => {
-    const { user } = req.query;
-    if (user !== undefined) {
-        res.send(`Hello, ${user}!`);
-    } else {
-        res.send('Hello, World!');
+    const { id } = req.params;
+    const course = courses.find(({id: courseId}) => courseId === id);
+    if (!course) {
+        return res.status(404).send("Page not found")
     }
+
+    res.view('src/views/courses/show', course);
 });
 
 app.listen({ port }, () => {
