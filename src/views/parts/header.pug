@@ -1,3 +1,10 @@
 div
     h1 Header
-    a(href='/') Home page
+    div
+        ul
+            li
+                a(href=`${route('home')}`) Home page
+            li
+                a(href=`${route('users')}`) Users
+            li
+                a(href=`${route('courses')}`) Courses

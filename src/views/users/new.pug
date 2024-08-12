@@ -1,5 +1,9 @@
-html
-    body
+extends ../layouts/page.pug
+
+block content
+    div
+        if error
+            p= error.message
         form(action = '/users', method = 'post')
             div
                 label Имя:

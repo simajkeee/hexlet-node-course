@@ -6,11 +6,11 @@ block content
             p No courses found
         else
             div
-                form(role = 'form' method = 'GET' action = '/courses')
+                form(role = 'form' method = 'GET' action = route('courses'))
                     input(type = 'search', name = 'term', value = term ? term : '')
                     input(type = 'submit' value = 'search')
             each course in courses
                 div
                     h2
-                        a(href=`/courses/${course.id}`)= course.title
+                        a(href=`${route('course', { id: course.id })}`)= course.title
                     p= course.description
