@@ -9,12 +9,8 @@ function generateCourse() {
     };
 }
 
-function generateCourses(numberOfCourses = 10) {
-    const courses = [];
-    for (let i = 0; i < numberOfCourses; i++) {
-        courses.push(generateCourse());
-    }
-    return courses;
+function generateCourses(count = 10) {
+    return faker.helpers.multiple(generateCourse, { count })
 }
 
 export default generateCourses;
