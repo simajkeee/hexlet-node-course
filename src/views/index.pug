@@ -2,3 +2,5 @@ extends layouts/page.pug
 
 block content
     h1 Home page
+    if !visited
+        | Это сообщение показывается только один раз. Если вы хотите увидеть его снова, сотрите куки
